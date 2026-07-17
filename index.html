@@ -11,13 +11,12 @@
     <style>
       :root {
         color-scheme: light;
-        --ink: #15221b;
-        --muted: #5d6c63;
-        --paper: #f6f3ec;
-        --card: #fffdf8;
-        --accent: #df5d37;
-        --accent-dark: #b63d20;
-        --line: #d8ddd6;
+        --ink: #111111;
+        --muted: #686868;
+        --paper: #ffffff;
+        --accent: #111111;
+        --accent-dark: #333333;
+        --line: #dedede;
       }
 
       * { box-sizing: border-box; }
@@ -47,23 +46,9 @@
       }
 
       .logo {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 800;
-        letter-spacing: -0.03em;
+        font-weight: 700;
+        letter-spacing: -0.02em;
         text-decoration: none;
-      }
-
-      .logo-mark {
-        display: grid;
-        width: 30px;
-        height: 30px;
-        place-items: center;
-        border-radius: 50%;
-        background: var(--ink);
-        color: var(--paper);
-        font-size: 13px;
       }
 
       nav { display: flex; align-items: center; gap: 28px; }
@@ -76,29 +61,27 @@
         justify-content: center;
         min-height: 46px;
         padding: 0 20px;
-        border-radius: 999px;
+        border-radius: 2px;
         background: var(--accent);
         color: white;
         font-size: 14px;
         font-weight: 750;
         text-decoration: none;
-        transition: background 160ms ease, transform 160ms ease;
+        transition: background 160ms ease;
       }
 
-      .button:hover, .button:focus-visible { background: var(--accent-dark); transform: translateY(-2px); }
+      .button:hover, .button:focus-visible { background: var(--accent-dark); }
 
       .hero {
         display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: 72px;
-        align-items: center;
-        min-height: 680px;
-        padding: 72px 0 110px;
+        grid-template-columns: 1fr;
+        min-height: 620px;
+        padding: 110px 0 140px;
       }
 
       .eyebrow {
         margin: 0 0 18px;
-        color: var(--accent-dark);
+        color: var(--muted);
         font-size: 13px;
         font-weight: 800;
         letter-spacing: 0.12em;
@@ -108,11 +91,10 @@
       h1 {
         max-width: 760px;
         margin: 0;
-        font-family: Georgia, "Times New Roman", serif;
-        font-size: clamp(54px, 7.5vw, 104px);
-        font-weight: 500;
-        letter-spacing: -0.055em;
-        line-height: 0.94;
+        font-size: clamp(52px, 8vw, 96px);
+        font-weight: 600;
+        letter-spacing: -0.06em;
+        line-height: 0.98;
       }
 
       .hero-copy > p:not(.eyebrow) {
@@ -122,30 +104,15 @@
         font-size: 19px;
       }
 
-      .hero-card {
-        position: relative;
-        overflow: hidden;
-        min-height: 430px;
-        padding: 36px;
-        border-radius: 180px 180px 28px 28px;
-        background: #c8d7bd;
-      }
-
-      .orb { position: absolute; border-radius: 50%; }
-      .orb-one { width: 240px; height: 240px; top: 62px; left: 55px; background: #f4b84e; }
-      .orb-two { width: 150px; height: 150px; top: 205px; right: 24px; background: var(--accent); mix-blend-mode: multiply; }
-      .stem { position: absolute; width: 8px; height: 190px; left: 50%; bottom: 0; background: var(--ink); transform: rotate(-24deg); }
-      .leaf { position: absolute; width: 110px; height: 54px; bottom: 82px; left: 76px; border-radius: 100% 0 100% 0; background: var(--ink); transform: rotate(18deg); }
-      .card-label { position: absolute; right: 30px; bottom: 24px; margin: 0; color: var(--ink); font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
-
       .services { padding: 96px 0; border-top: 1px solid var(--line); }
       .section-heading { display: flex; justify-content: space-between; gap: 24px; align-items: end; margin-bottom: 42px; }
-      h2 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(36px, 5vw, 58px); font-weight: 500; letter-spacing: -0.04em; line-height: 1; }
+      h2 { margin: 0; font-size: clamp(36px, 5vw, 58px); font-weight: 600; letter-spacing: -0.045em; line-height: 1; }
       .section-heading p { max-width: 440px; margin: 0; color: var(--muted); }
 
-      .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-      .service-card { min-height: 250px; padding: 28px; border: 1px solid var(--line); border-radius: 22px; background: var(--card); }
-      .number { color: var(--accent-dark); font-size: 13px; font-weight: 800; }
+      .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+      .service-card { min-height: 250px; padding: 28px 28px 28px 0; border-top: 1px solid var(--line); }
+      .service-card + .service-card { padding-left: 28px; border-left: 1px solid var(--line); }
+      .number { color: var(--muted); font-size: 13px; font-weight: 700; }
       h3 { margin: 72px 0 10px; font-size: 22px; letter-spacing: -0.025em; }
       .service-card p { margin: 0; color: var(--muted); font-size: 15px; }
 
@@ -155,10 +122,10 @@
       @media (max-width: 760px) {
         nav a:not(.button) { display: none; }
         .hero { grid-template-columns: 1fr; gap: 50px; padding-top: 60px; }
-        .hero-card { min-height: 360px; }
         .section-heading { display: block; }
         .section-heading p { margin-top: 18px; }
         .grid { grid-template-columns: 1fr; }
+        .service-card + .service-card { padding-left: 0; border-left: 0; }
         footer { flex-direction: column; }
       }
 
@@ -172,7 +139,6 @@
     <div class="shell">
       <header>
         <a class="logo" href="#top" aria-label="Northstar home">
-          <span class="logo-mark" aria-hidden="true">N</span>
           Northstar
         </a>
         <nav aria-label="Main navigation">
@@ -189,13 +155,6 @@
             <h1 id="hero-title">Ideas made beautifully useful.</h1>
             <p>We help ambitious teams turn complex ideas into clear, memorable digital experiences that people enjoy using.</p>
             <a class="button" href="#services">Explore what we do&nbsp; →</a>
-          </div>
-          <div class="hero-card" aria-label="Abstract botanical illustration" role="img">
-            <span class="orb orb-one"></span>
-            <span class="orb orb-two"></span>
-            <span class="stem"></span>
-            <span class="leaf"></span>
-            <p class="card-label">Made with purpose</p>
           </div>
         </section>
 
