@@ -1,3 +1,3 @@
-# Try
+# Northstar Studio example site
 
-Initial project placeholder.
+A responsive, dependency-free example landing page. Open `index.html` directly in a browser or serve the directory with any static file server.
