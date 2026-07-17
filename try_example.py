@@ -7,6 +7,8 @@ def main():
         print(f"Result is {result}")
     except ZeroDivisionError as e:
         print(f"Caught an exception: {e}")
+    finally:
+        print("Execution of try-except block complete.")
 
 if __name__ == "__main__":
     main()
