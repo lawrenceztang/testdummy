@@ -1,5 +1,11 @@
 const http = require("node:http");
 
+const ALLOWED_METHODS = new Map([
+  ["/health", "GET"],
+  ["/greet", "GET"],
+  ["/echo", "POST"],
+]);
+
 function sendJson(response, statusCode, body) {
   response.writeHead(statusCode, { "content-type": "application/json" });
   response.end(JSON.stringify(body));
@@ -42,6 +48,14 @@ function createServer() {
       } catch {
         sendJson(response, 400, { error: "Invalid JSON" });
       }
+      return;
+    }
+
+    const allowedMethod = ALLOWED_METHODS.get(url.pathname);
+
+    if (allowedMethod) {
+      response.setHeader("allow", allowedMethod);
+      sendJson(response, 405, { error: "Method not allowed" });
       return;
     }
 

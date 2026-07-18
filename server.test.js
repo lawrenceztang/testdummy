@@ -78,3 +78,13 @@ test("rejects malformed JSON", async () => {
     assert.deepEqual(await response.json(), { error: "Invalid JSON" });
   });
 });
+
+test("reports the allowed method for a known route", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/health`, { method: "POST" });
+
+    assert.equal(response.status, 405);
+    assert.equal(response.headers.get("allow"), "GET");
+    assert.deepEqual(await response.json(), { error: "Method not allowed" });
+  });
+});
