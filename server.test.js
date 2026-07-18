@@ -34,3 +34,21 @@ test("returns JSON for unknown routes", async () => {
     assert.deepEqual(await response.json(), { error: "Not found" });
   });
 });
+
+test("greets a name supplied in the query string", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/greet?name=Ada%20Lovelace`);
+
+    assert.equal(response.status, 200);
+    assert.deepEqual(await response.json(), { message: "Hello, Ada Lovelace!" });
+  });
+});
+
+test("requires a name when greeting", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/greet?name=%20`);
+
+    assert.equal(response.status, 400);
+    assert.deepEqual(await response.json(), { error: "A name is required" });
+  });
+});

@@ -7,8 +7,22 @@ function sendJson(response, statusCode, body) {
 
 function createServer() {
   return http.createServer((request, response) => {
-    if (request.method === "GET" && request.url === "/health") {
+    const url = new URL(request.url, "http://localhost");
+
+    if (request.method === "GET" && url.pathname === "/health") {
       sendJson(response, 200, { status: "ok" });
+      return;
+    }
+
+    if (request.method === "GET" && url.pathname === "/greet") {
+      const name = url.searchParams.get("name")?.trim();
+
+      if (!name) {
+        sendJson(response, 400, { error: "A name is required" });
+        return;
+      }
+
+      sendJson(response, 200, { message: `Hello, ${name}!` });
       return;
     }
 
