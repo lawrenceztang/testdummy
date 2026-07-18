@@ -55,6 +55,33 @@
       nav a { color: var(--muted); font-size: 14px; font-weight: 650; text-decoration: none; }
       nav a:hover, nav a:focus-visible { color: var(--ink); }
 
+      .theme-toggle {
+        min-height: 38px;
+        padding: 0 12px;
+        border: 1px solid var(--line);
+        border-radius: 2px;
+        background: transparent;
+        color: var(--ink);
+        cursor: pointer;
+        font: inherit;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .theme-toggle:hover, .theme-toggle:focus-visible { border-color: var(--ink); }
+
+      :root[data-theme="dark"] {
+        color-scheme: dark;
+        --ink: #f4f4f4;
+        --muted: #a8a8a8;
+        --paper: #111111;
+        --accent: #f4f4f4;
+        --accent-dark: #d8d8d8;
+        --line: #343434;
+      }
+
+      :root[data-theme="dark"] .button { color: #111111; }
+
       .button {
         display: inline-flex;
         align-items: center;
@@ -144,6 +171,7 @@
         <nav aria-label="Main navigation">
           <a href="#services">Services</a>
           <a href="#about">About</a>
+          <button class="theme-toggle" type="button" aria-pressed="false">Dark mode</button>
           <a class="button" href="mailto:hello@example.com">Start a project</a>
         </nav>
       </header>
@@ -188,5 +216,6 @@
         <p>Clear thinking. Thoughtful making.</p>
       </footer>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>
