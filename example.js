@@ -8,8 +8,19 @@ function greet(name = "World") {
   return `Hello, ${trimmedName}!`;
 }
 
-if (require.main === module) {
-  console.log(greet(process.argv[2]));
+function greetAll(names) {
+  if (!Array.isArray(names)) {
+    throw new TypeError("Names must be an array");
+  }
+
+  return names.map((name) => greet(name));
 }
 
-module.exports = { greet };
+if (require.main === module) {
+  const names = process.argv.slice(2);
+  const greetings = names.length > 0 ? greetAll(names) : [greet()];
+
+  console.log(greetings.join("\n"));
+}
+
+module.exports = { greet, greetAll };
