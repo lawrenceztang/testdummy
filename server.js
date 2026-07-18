@@ -5,8 +5,18 @@ function sendJson(response, statusCode, body) {
   response.end(JSON.stringify(body));
 }
 
+async function readJson(request) {
+  let body = "";
+
+  for await (const chunk of request) {
+    body += chunk;
+  }
+
+  return JSON.parse(body);
+}
+
 function createServer() {
-  return http.createServer((request, response) => {
+  return http.createServer(async (request, response) => {
     const url = new URL(request.url, "http://localhost");
 
     if (request.method === "GET" && url.pathname === "/health") {
@@ -23,6 +33,15 @@ function createServer() {
       }
 
       sendJson(response, 200, { message: `Hello, ${name}!` });
+      return;
+    }
+
+    if (request.method === "POST" && url.pathname === "/echo") {
+      try {
+        sendJson(response, 200, { data: await readJson(request) });
+      } catch {
+        sendJson(response, 400, { error: "Invalid JSON" });
+      }
       return;
     }
 

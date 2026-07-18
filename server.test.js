@@ -52,3 +52,29 @@ test("requires a name when greeting", async () => {
     assert.deepEqual(await response.json(), { error: "A name is required" });
   });
 });
+
+test("echoes a JSON request body", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/echo`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ message: "Hello" }),
+    });
+
+    assert.equal(response.status, 200);
+    assert.deepEqual(await response.json(), { data: { message: "Hello" } });
+  });
+});
+
+test("rejects malformed JSON", async () => {
+  await withServer(async (baseUrl) => {
+    const response = await fetch(`${baseUrl}/echo`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: "not json",
+    });
+
+    assert.equal(response.status, 400);
+    assert.deepEqual(await response.json(), { error: "Invalid JSON" });
+  });
+});
